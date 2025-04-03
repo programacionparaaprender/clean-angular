@@ -36,13 +36,15 @@ export class UsersComponent implements OnInit {
     return datos;
   }
 
-  saveUser() {
+  async saveUser() {
     if (this.editing) {
       this.updateUserUseCase.execute(this.newUser);
     } else {
       this.createUserUseCase.execute(this.newUser);
     }
     this.resetForm();
+    const dates = await this.getUsers();
+    this.users = dates;
   }
 
   editUser(user: User) {
@@ -53,6 +55,8 @@ export class UsersComponent implements OnInit {
   async deleteUser(id: number) {
     this.deleteUserUseCase.execute(id);
     this.users = await this.getUsers();
+    console.log('deleteUser');
+    console.log(this.users);
   }
 
   resetForm() {

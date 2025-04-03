@@ -6,6 +6,7 @@ import { UserRepository } from '../../../domain/users/repositories/user.reposito
 import { Observable } from 'rxjs';
 import { User } from '../../../domain/users/entities/user.interface';
 import { UserImplementationRepository } from '../../../infraestructure/users/repositories/user-implementation.repository';
+import { UserRemovableImplRepository } from '../../../infraestructure/users/repositories/user-removable-impl.repository';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ import { UserImplementationRepository } from '../../../infraestructure/users/rep
 export class DeleteUserUseCase
   implements UseCase<number, ResponseDto<User>>
 {
-  constructor(private userRepository: UserImplementationRepository) {}
+  constructor(private userRepository: UserRemovableImplRepository) {}
   public execute(param: number): Observable<ResponseDto<User>> {
     return this.userRepository.deleteUser(param);
   }

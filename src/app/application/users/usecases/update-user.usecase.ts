@@ -5,6 +5,7 @@ import { UserRepository } from '../../../domain/users/repositories/user.reposito
 import { Observable } from 'rxjs';
 import { User } from '../../../domain/users/entities/user.interface';
 import { UserImplementationRepository } from '../../../infraestructure/users/repositories/user-implementation.repository';
+import { UserWriterImplRepository } from '../../../infraestructure/users/repositories/user-writer-impl.repository';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ import { UserImplementationRepository } from '../../../infraestructure/users/rep
 export class UpdateUserUseCase
   implements UseCase<User, ResponseDto<User>>
 {
-  constructor(private userRepository: UserImplementationRepository) {}
+  constructor(private userRepository: UserWriterImplRepository) {}
   public execute(params: User): Observable<ResponseDto<User>> {
     return this.userRepository.update(params);
   }
